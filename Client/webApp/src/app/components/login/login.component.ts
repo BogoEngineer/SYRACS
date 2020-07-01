@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
         this.snackBar.open("There is no user with given credentials!", null, {
           duration: 1500
         });
-      }else if((res as any).data.admin == false){
+      }else if((res as any).data[0].admin == false){
         this.router.navigate(['user/home'])
         localStorage.setItem('userInfo', JSON.stringify((res as any).data));
       }else{
