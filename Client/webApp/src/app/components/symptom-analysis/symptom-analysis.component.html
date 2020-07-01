@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br>
+    <h5>Select your symptoms:</h5>
+    <hr style="height: 30px; color: grey;">
+    <div class="container">
+        <mat-selection-list #symptoms>
+            <mat-list-option *ngFor="let symptom of symptomList">
+              {{symptom}}
+            </mat-list-option>
+          </mat-selection-list>
+          
+          <p>
+            Options selected: {{symptoms.selectedOptions.selected.length}}
+          </p>
+    </div>
+    <h5>Upload an image of your scans(if any):</h5>
+    <br>
+    <div class="img">
+        <input #imageInput hidden="true" type="file" onclick="this.value=null" (change)="imageInputChange($event)" accept=".jpg"/>
+        <button mat-flat-button color="primary" (click)="imageInput.click()">Choose Image File (JPG)</button>
+        {{file_name}}
+        <br>
+        <br>
+        <button mat-flat-button color="primary" (click)="fake()">See your results</button>
+    </div>
+</body>
+</html>

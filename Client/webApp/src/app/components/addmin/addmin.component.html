@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <br>
+    <mat-tab-group mat-align-tabs="start">
+        <mat-tab label="Add Virus">
+          <div class="stepper">
+            <mat-vertical-stepper #stepper>
+              <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+                <form [formGroup]="firstFormGroup">
+                  <ng-template matStepLabel>Fill out name of the virus</ng-template>
+                  <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Ex. Covid-20" formControlName="firstCtrl" required>
+                  </mat-form-field>
+                  <div>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="secondFormGroup" errorMessage="Type is required.">
+                <form [formGroup]="secondFormGroup">
+                  <ng-template matStepLabel>Fill out virus type(s)</ng-template>
+                  <div class="select">
+                      <mat-selection-list #symptoms formControlName="secondCtrl">
+                          <mat-list-option *ngFor="let type of types" value="{{type}}">
+                            {{type}}
+                          </mat-list-option>
+                      </mat-selection-list>
+                  </div>
+                  <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="thirdFormGroup" errorMessage="Symptoms are required.">
+                  <form [formGroup]="thirdFormGroup">
+                    <ng-template matStepLabel>Fill out virus symptoms(s)</ng-template>
+                      <mat-form-field class="example-chip-list">
+                          <mat-chip-list #chipList aria-label="Fruit selection">
+                            <mat-chip *ngFor="let symptom of symptomList" [selectable]="selectable"
+                                     [removable]="removable" (removed)="remove(symptom)">
+                              {{symptom}}
+                              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input placeholder="Symptoms..."
+                                   [matChipInputFor]="chipList"
+                                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                   [matChipInputAddOnBlur]="addOnBlur"
+                                   (matChipInputTokenEnd)="add($event)" required>
+                          </mat-chip-list>
+                        </mat-form-field>
+                    <div>
+                      <button mat-button matStepperPrevious>Back</button>
+                      <button mat-button matStepperNext>Next</button>
+                    </div>
+                  </form>
+              </mat-step>
+              <mat-step [stepControl]="fourthFormGroup" errorMessage="Description is required.">
+                  <form [formGroup]="fourthFormGroup">
+                    <ng-template matStepLabel>Fill out description of the virus</ng-template>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Description</mat-label>
+                      <textarea matInput placeholder="Ex. Covid-20 is a virus." formControlName="fourthCtrl" required></textarea>
+                    </mat-form-field>
+                    <div>
+                      <button mat-button matStepperNext>Next</button>
+                    </div>
+                  </form>
+              </mat-step>
+              <mat-step [stepControl]="fifthFormGroup" errorMessage="Progress is required.">
+                  <form [formGroup]="fifthFormGroup">
+                    <ng-template matStepLabel>Fill out progress of the virus</ng-template>
+                    <mat-form-field>
+                      <mat-label>Progress</mat-label>
+                      <input matInput placeholder="Ex. 50" formControlName="fifthCtrl" required>
+                    </mat-form-field>
+                    <div>
+                      <button mat-button matStepperNext>Next</button>
+                    </div>
+                  </form>
+              </mat-step>
+              <mat-step [stepControl]="sixthFormGroup" errorMessage="Positive cases description is required.">
+                  <form [formGroup]="sixthFormGroup">
+                    <ng-template matStepLabel>Fill out the number of positive cases</ng-template>
+                    <mat-form-field>
+                      <mat-label>Positive cases</mat-label>
+                      <input matInput placeholder="Ex. 50000" formControlName="sixthCtrl" required>
+                    </mat-form-field>
+                    <div>
+                      <button mat-button matStepperNext>Next</button>
+                    </div>
+                  </form>
+              </mat-step>
+              <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                <p>You are now done.</p>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button (click)="stepper.reset()">Reset</button>
+                  <button mat-button (click)="addVirus()">Submit</button>
+                </div>
+              </mat-step>
+            </mat-vertical-stepper>
+          </div>
+        </mat-tab>
+        <mat-tab label="Add User">
+          <div class="stepper">
+            <mat-vertical-stepper #stepper>
+              <mat-step [stepControl]="seventhFormGroup">
+                <form [formGroup]="seventhFormGroup">
+                  <ng-template matStepLabel>Fill out username</ng-template>
+                  <mat-form-field>
+                    <mat-label>Username</mat-label>
+                    <input matInput placeholder="Ex. zika" formControlName="firstCtrl" required>
+                  </mat-form-field>
+                  <div>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="seventhFormGroup">
+                <form [formGroup]="seventhFormGroup">
+                  <ng-template matStepLabel>Fill out password</ng-template>
+                  <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="secondCtrl" placeholder="Ex. 123" type="password"
+                           required>
+                  </mat-form-field>
+                  <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="seventhFormGroup">
+                  <form [formGroup]="seventhFormGroup">
+                    <ng-template matStepLabel>Select if admin</ng-template>
+
+                      <div class="select">
+                          <mat-selection-list #symptoms formControlName="thirdCtrl">
+                              <mat-list-option value="true">
+                                User will have admin privileges
+                              </mat-list-option>
+                          </mat-selection-list>
+                      </div>
+
+                    <div>
+                      <button mat-button matStepperNext>Next</button>
+                    </div>
+                  </form>
+                </mat-step>
+              <mat-step [stepControl]="seventhFormGroup">
+                  <form [formGroup]="seventhFormGroup">
+                    <ng-template matStepLabel>Fill out email</ng-template>
+                    <mat-form-field>
+                      <mat-label>Email</mat-label>
+                      <input matInput placeholder="Ex. zika@gmail.com" formControlName="fourthCtrl" required>
+                    </mat-form-field>
+                    <div>
+                      <button mat-button matStepperNext>Next</button>
+                    </div>
+                  </form>
+              </mat-step>
+              <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                <p>You are now done.</p>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button (click)="stepper.reset()">Reset</button>
+                  <button mat-button (click)="addUser()">Submit</button>
+                </div>
+              </mat-step>
+            </mat-vertical-stepper>
+          </div>
+        </mat-tab>
+    </mat-tab-group>
+</body>
+</html>

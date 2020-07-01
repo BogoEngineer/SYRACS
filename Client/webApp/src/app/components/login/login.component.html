@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Fill in credentials</h5>
+          <mat-form-field appearance="fill" class="username" [style.fontSize.px]=14>
+            <mat-label>Enter your username</mat-label>
+            <input matInput required [(ngModel)]='user.username'>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="password" [style.fontSize.px]=14>
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" required [(ngModel)]='user.password'>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <a href="javascript:void(0)" class="card-link" (click)="logIn()">Log In</a>
+          <span class="or"> or </span>
+          <a href="javascript:void(0)" class="card-link guest" (click)="visit()">Proceed as a guest</a>
+        </div>
+      </div>
+</body>
+</html>

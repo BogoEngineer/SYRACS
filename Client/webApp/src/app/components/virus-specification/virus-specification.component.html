@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{virus.name}} specifications
+            </mat-panel-title>
+            <mat-panel-description>
+              Click to {{panelOpenState ? 'close' : 'open'}}!
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="description">
+            {{virus.description}}
+          </div>
+          <div class="image">
+            <br>
+            <p>Progress:</p>
+            <mat-progress-spinner
+              class="example-margin"
+              [color]="color"
+              [mode]="mode"
+              [value]="virus.progress">
+            </mat-progress-spinner>
+            <br>
+            <p>Symptoms:</p>
+            {{virus.symptoms}}
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+</body>
+</html>
